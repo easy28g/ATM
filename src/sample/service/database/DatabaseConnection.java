@@ -1,13 +1,13 @@
-package sample.service;
+package sample.service.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DatabaseConnection {
+public class DatabaseConnection implements DBservice {
 
     static Connection connection;
 
-    public void ConnectionSQLite() {
+    private void ConnectionSQLite() {
         Connection connection = getConnection();
         System.out.println("Connection");
     }
@@ -25,7 +25,7 @@ public class DatabaseConnection {
         return null;
     }
 
-    public void close() {
+    private void close() {
         try{
             connection.close();
             System.out.println("Close connection");
@@ -35,4 +35,14 @@ public class DatabaseConnection {
         }
     }
 
+
+    @Override
+    public void databaseConnection() {
+        ConnectionSQLite();
+    }
+
+    @Override
+    public void databaseClose() {
+        close();
+    }
 }
