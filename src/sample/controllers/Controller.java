@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -39,7 +40,7 @@ public class Controller {
 
     @FXML
     void initialize() {
-        DBservice connectionClose = new DatabaseConnection();
+        DBservice connectionClose = DatabaseConnection.INSTANCE;
         connectionClose.databaseConnection();
 
         FindLogin findLogin = new UserServiceImpl();
@@ -73,8 +74,13 @@ public class Controller {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
+
+                connectionClose.databaseClose();
+
             } else {
-                System.out.println("NOOOOOOO");
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Вход невыполнен!");
+                alert.show();
+                //System.out.println("NOOOOOOO");
             }
         });
         

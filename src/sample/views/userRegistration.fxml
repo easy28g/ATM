@@ -41,22 +41,22 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Label fx:id="errorInPutUserName" layoutX="270.0" layoutY="182.0" prefHeight="16.0" prefWidth="167.0" text="Label" textFill="RED">
+      <Label fx:id="errorInPutUserName" layoutX="270.0" layoutY="182.0" prefHeight="16.0" prefWidth="329.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Label fx:id="errorInPutUserLogin" layoutX="270.0" layoutY="256.0" prefHeight="16.0" prefWidth="167.0" text="Label" textFill="RED">
+      <Label fx:id="errorInPutUserLogin" layoutX="270.0" layoutY="256.0" prefHeight="16.0" prefWidth="329.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Label fx:id="errorInPutUserPassword" layoutX="270.0" layoutY="321.0" prefHeight="16.0" prefWidth="167.0" text="Label" textFill="RED">
+      <Label fx:id="errorInPutUserPassword" layoutX="270.0" layoutY="321.0" prefHeight="16.0" prefWidth="329.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Label fx:id="errorCreateNewUser" layoutX="200.0" layoutY="415.0" prefHeight="16.0" prefWidth="203.0" text="Label" textFill="RED">
+      <Label fx:id="errorCreateNewUser" layoutX="200.0" layoutY="415.0" prefHeight="16.0" prefWidth="203.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>
