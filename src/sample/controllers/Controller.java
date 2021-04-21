@@ -77,6 +77,24 @@ public class Controller {
                 System.out.println("NOOOOOOO");
             }
         });
+        
+        userReg.setOnAction(actionEvent -> {
+            userReg.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/views/userRegistration.fxml"));
+
+            try{
+                loader.load();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        });
 
     }
 }
