@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="500.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SaleOperation">
    <children>
       <AnchorPane prefHeight="30.0" prefWidth="603.0" style="-fx-background-color: #2E3348;" />
@@ -18,13 +17,13 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="112.0" layoutY="65.0" />
+      <TextField fx:id="barcode" layoutX="112.0" layoutY="65.0" />
       <TableView layoutX="41.0" layoutY="147.0" prefHeight="205.0" prefWidth="334.0">
         <columns>
-          <TableColumn prefWidth="104.0" text="product" />
-          <TableColumn prefWidth="90.0" text="price" />
-            <TableColumn prefWidth="54.0" text="amount" />
-            <TableColumn prefWidth="84.0" text="add date" />
+          <TableColumn fx:id="productColumn" prefWidth="104.0" text="product" />
+          <TableColumn fx:id="priceColumn" prefWidth="90.0" text="price" />
+            <TableColumn fx:id="amountColumn" prefWidth="54.0" text="amount" />
+            <TableColumn fx:id="addDateColumn" prefWidth="84.0" text="add date" />
         </columns>
       </TableView>
       <Pane layoutX="297.0" layoutY="30.0" prefHeight="91.0" prefWidth="26.0" style="-fx-background-color: #2E3348;" />
@@ -33,23 +32,23 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="429.0" layoutY="64.0" />
-      <Button layoutX="425.0" layoutY="215.0" mnemonicParsing="false" text="Добавить">
+      <TextField fx:id="amountProduct" layoutX="429.0" layoutY="64.0" />
+      <Button fx:id="entryProduct" layoutX="425.0" layoutY="215.0" mnemonicParsing="false" text="Добавить">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Label layoutX="96.0" layoutY="350.0" prefHeight="35.0" prefWidth="143.0" text="Общая сумма: ">
+      <Label layoutX="65.0" layoutY="350.0" prefHeight="35.0" prefWidth="143.0" text="Общая сумма: ">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="243.0" layoutY="353.0" prefHeight="28.0" prefWidth="133.0" style="-fx-border-color: black;" text="Label">
+      <Label fx:id="totalSum" layoutX="235.0" layoutY="354.0" prefHeight="28.0" prefWidth="133.0" style="-fx-border-color: black;" text="Label">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Button layoutX="181.0" layoutY="403.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="258.0" text="Завершить операцию">
+      <Button fx:id="finishOperaion" layoutX="178.0" layoutY="402.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="244.0" text="Завершить операцию">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -58,5 +57,15 @@
       <AnchorPane layoutY="113.0" prefHeight="16.0" prefWidth="603.0" style="-fx-background-color: #2E3348;" />
       <Pane layoutX="589.0" layoutY="26.0" prefHeight="448.0" prefWidth="14.0" style="-fx-background-color: #2E3348;" />
       <Pane layoutX="-5.0" layoutY="26.0" prefHeight="448.0" prefWidth="20.0" style="-fx-background-color: #2E3348;" />
+      <Button fx:id="nextPageOpDetails" layoutX="447.0" layoutY="402.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="Next">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitMenu" layoutX="54.0" layoutY="402.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="Выход">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

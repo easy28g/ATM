@@ -1,11 +1,16 @@
 package sample.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sample.service.database.DBservice;
 import sample.service.database.DatabaseConnection;
 import sample.service.forUsers.FindLogin;
@@ -50,10 +55,26 @@ public class Controller {
 
             boolean loginBool = findLogin.loginUser(loginButton);
             boolean passwordBool = findPassword.passwordUser(passwordButton);
-
+            //System.out.println(loginBool);
             if(loginBool==true && passwordBool==true){
                 System.out.println("YEEEEEEEEEE");
+                signInForUser.getScene().getWindow().hide();
 
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/sample/views/saleOperation.fxml"));
+
+                try{
+                    loader.load();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+                Parent root = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } else {
+                System.out.println("NOOOOOOO");
             }
         });
 

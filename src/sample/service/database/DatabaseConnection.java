@@ -1,11 +1,27 @@
 package sample.service.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class DatabaseConnection implements DBservice {
 
-    static Connection connection;
+    public static Connection connection;
+//    public static Statement statement;
+//
+//    public static ResultSet statementExecuteQuery(String query) throws SQLException {
+//        ResultSet statementExecuteQuery =statement.executeQuery(query);
+//        return statementExecuteQuery;
+//    }
+//
+//    public static Statement createStatement() throws SQLException {
+//        Statement createStatement = connection.createStatement();
+//        return createStatement;
+//    }
+//
+//    public static Statement closeStatement() throws SQLException {
+//        Statement closeStatement = null;
+//        closeStatement.close();
+//        return closeStatement;
+//    }
 
     private void ConnectionSQLite() {
         Connection connection = getConnection();
