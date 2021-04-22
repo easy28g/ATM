@@ -83,6 +83,8 @@ public class Controller {
                 //System.out.println("NOOOOOOO");
             }
         });
+
+
         
         userReg.setOnAction(actionEvent -> {
             userReg.getScene().getWindow().hide();

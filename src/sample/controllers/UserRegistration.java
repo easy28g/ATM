@@ -54,6 +54,8 @@ public class UserRegistration {
     @FXML
     private Label errorInPutUserPassword;
 
+    @FXML
+    private Button toMenu;
 
     @FXML
     void initialize() {
@@ -139,6 +141,25 @@ public class UserRegistration {
                 alert.show();
             }
 
+        });
+
+
+        toMenu.setOnAction(actionEvent -> {
+            toMenu.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/views/sample.fxml"));
+
+            try{
+                loader.load();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
         });
 
     }
