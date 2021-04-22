@@ -56,10 +56,5 @@
             <Font size="11.0" />
          </font>
       </Label>
-      <Label fx:id="errorCreateNewUser" layoutX="200.0" layoutY="415.0" prefHeight="16.0" prefWidth="203.0" textFill="RED">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

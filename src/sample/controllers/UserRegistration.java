@@ -9,9 +9,17 @@ import javafx.stage.Stage;
 import sample.service.database.DBservice;
 import sample.service.database.DatabaseConnection;
 import sample.service.forUserReg.CorrectUserNameLoginPassword;
+import sample.service.forUserReg.getuserId.GetUserIdFromTable;
+import sample.service.forUserReg.getuserId.GetUserIdInterface;
 import sample.service.forUserReg.impl.CorrectUserPasswordReg;
 import sample.service.forUserReg.impl.CorrectUserLoginReg;
 import sample.service.forUserReg.impl.CorrectUserNameReg;
+import sample.service.forUserReg.insertIntoUserReg.InsertUserLoginPassword;
+import sample.service.forUserReg.insertIntoUserReg.InsertUserLoginPasswordInterface;
+import sample.service.forUserReg.insertIntoUserReg.InsertUserName;
+import sample.service.forUserReg.insertIntoUserReg.InsertUserInterface;
+import sample.service.forUsers.FindLogin;
+import sample.service.forUsers.impl.UserServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,8 +54,6 @@ public class UserRegistration {
     @FXML
     private Label errorInPutUserPassword;
 
-    @FXML
-    private Label errorCreateNewUser;
 
     @FXML
     void initialize() {
@@ -90,33 +96,48 @@ public class UserRegistration {
             if(kirillica && loginBoolean && passwordBoolean){
                 newUserRegistration.getScene().getWindow().hide();
 
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/views/saleOperation.fxml"));
+                //Проверка на существование логина в БД
+                //если нет такого логина, то создадим аккаунт
+                FindLogin findLogin = new UserServiceImpl();
+                if(findLogin.loginUser(newUserLogin)==false){
 
-                try{
-                    loader.load();
-                }catch (IOException e){
-                    e.printStackTrace();
+                    //Вводим имя пользователя в БД
+                    InsertUserInterface inserUserName = new InsertUserName();
+                    inserUserName.insertUserRegInterface(newUserName);
+
+                    //Получаем ID пользователя по имени
+                    GetUserIdInterface getUserId = new GetUserIdFromTable();
+                    int idUser = getUserId.getUserId(newUserName);
+
+                    //Вводим логин и пароль в БД
+                    InsertUserLoginPasswordInterface insertLoginPassword = new InsertUserLoginPassword();
+                    insertLoginPassword.insertUserLoginPassword(idUser,newUserLogin,newUserPassword);
+
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/sample/views/saleOperation.fxml"));
+
+                    try{
+                        loader.load();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+                    Parent root = loader.getRoot();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Такой логин уже существует!");
+                    alert.show();
                 }
 
-                Parent root = loader.getRoot();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Неудалось зарегистрировать! " +
                         "Введите все данные правильно!");
                 alert.show();
             }
-
-//            if(Pattern.matches("^[а-яА-ЯёЁ\s]+$",newUserName) && newUserName.length()>=3){
-//                System.out.println("Кириллица");
-//                errorInPutUserName.setText("");
-//                kirillica = true;
-//            } else {
-//                errorInPutUserName.setText("Имя должен содержать в себе больше 3 символов кирилицы!");
-//                System.out.println("Не кириллица");
-//            }
 
         });
 

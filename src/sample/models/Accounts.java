@@ -9,11 +9,11 @@ public class Accounts {
     public Accounts() {
     }
 
-    public Accounts(int userId, String login, String password, int active) {
+    public Accounts(int userId, String login, String password) {
         this.userId = userId;
         this.login = login;
         this.password = password;
-        this.active = active;
+        this.active = 1;
     }
 
     public int getUserId() {

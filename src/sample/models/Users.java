@@ -8,8 +8,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(int id, String firstname) {
-        this.id = id;
+    public Users( String firstname) {
         this.firstname = firstname;
     }
 
