@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.service.database.DBservice;
 import sample.service.database.DatabaseConnection;
+import sample.service.forUsers.FindActiveAccount;
 import sample.service.forUsers.FindLogin;
 import sample.service.forUsers.FindPassword;
 import sample.service.forUsers.impl.UserServiceImpl;
@@ -49,6 +50,8 @@ public class Controller {
         FindPassword findPassword = new UserServiceImpl();
         //boolean passwordBool = findPassword.passwordUser("userPassword");
 
+        FindActiveAccount findActiveAccount = new UserServiceImpl();
+
         signInForUser.setOnAction(actionEvent -> {
 
             String loginButton = userLogin.getText().trim();
@@ -56,31 +59,37 @@ public class Controller {
 
             boolean loginBool = findLogin.loginUser(loginButton);
             boolean passwordBool = findPassword.passwordUser(passwordButton);
-            //System.out.println(loginBool);
-            if(loginBool==true && passwordBool==true){
-                System.out.println("YEEEEEEEEEE");
-                signInForUser.getScene().getWindow().hide();
+            boolean activeCheck = findActiveAccount.activeAccountUser(loginButton);
 
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/views/saleOperation.fxml"));
+            if(activeCheck) {
+                //System.out.println(loginBool);
+                if (loginBool == true && passwordBool == true) {
+                    System.out.println("YEEEEEEEEEE");
+                    signInForUser.getScene().getWindow().hide();
 
-                try{
-                    loader.load();
-                }catch (IOException e){
-                    e.printStackTrace();
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/sample/views/saleOperation.fxml"));
+
+                    try {
+                        loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Parent root = loader.getRoot();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Вход невыполнен!");
+                    alert.show();
+                    //System.out.println("NOOOOOOO");
                 }
-
-                Parent root = loader.getRoot();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-
-                connectionClose.databaseClose();
-
             } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Вход невыполнен!");
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Ваш аккаунт не активен!");
                 alert.show();
-                //System.out.println("NOOOOOOO");
             }
         });
 

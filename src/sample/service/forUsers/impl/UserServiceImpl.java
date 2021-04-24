@@ -2,6 +2,7 @@ package sample.service.forUsers.impl;
 
 import sample.service.database.DBservice;
 import sample.service.database.DatabaseConnection;
+import sample.service.forUsers.FindActiveAccount;
 import sample.service.forUsers.FindLogin;
 import sample.service.forUsers.FindPassword;
 
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserServiceImpl implements FindLogin, FindPassword {
+public class UserServiceImpl implements FindLogin, FindPassword, FindActiveAccount {
 
     DBservice connectionClose = new DatabaseConnection();
     Statement statement;
@@ -58,5 +59,27 @@ public class UserServiceImpl implements FindLogin, FindPassword {
             System.out.println(e.getMessage());
         }
         return true;
+    }
+
+    @Override
+    public boolean activeAccountUser(String login) {
+        try {
+            statement = DatabaseConnection.connection.createStatement();
+            String query = "SELECT active FROM accounts WHERE login='"+login+"'";
+            ResultSet rs = statement.executeQuery(query);
+            int active=0;
+            while (rs.next()){
+                 active = rs.getInt("active");
+            }
+            if (active>=1) {
+                return true;
+            }
+
+            rs.close();
+            statement.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
